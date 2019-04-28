@@ -1,4 +1,4 @@
-﻿namespace BomSweeper.GlobalTool
+namespace BomSweeper.GlobalTool
 {
     class Program
     {
