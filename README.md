@@ -54,12 +54,12 @@ Options are as follows:
 | `-h`, `--help` | Show help message and exit |
 | `-v`, `--verbose` | Be verbose |
 
-## Exit status
+### Exit status
 
 BomSweeper exits 0 if no files starting with a UTF-8 BOM are found,
 and &gt;0 if one or more files are found or if an error occurs.
 
-## Example
+### Example
 
 ```bash
 dotnet BomSweeper.dll '**/*.cs'
@@ -81,7 +81,7 @@ and remove a UTF-8 BOM from the files if any.
 - Visual Studio 2019 Version 16.0
   or [.NET Core 2.2 SDK (SDK 2.2.203)][dotnet-core-sdk]
 
-### How to get started
+### Get started
 
 ```bash
 git clone URL
@@ -90,7 +90,7 @@ dotnet restore
 dotnet build
 ```
 
-### How to get test coverage report with Coverlet
+### Get test coverage report with Coverlet
 
 ```bash
 dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=opencover \
@@ -98,6 +98,14 @@ dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=opencover \
 dotnet ANYWHERE/reportgenerator.dll \
         --reports:BomSweeper.Test/coverage.opencover.xml \
         --targetdir:Coverlet-html
+```
+
+### Install BomSweeper as a Global Tool
+
+```bash
+cd BomSweeper.GlobalTool
+dotnet pack
+dotnet tool install --global --add-source bin/Debug BomSweeper.GlobalTool
 ```
 
 [dotnet-core-sdk]:
