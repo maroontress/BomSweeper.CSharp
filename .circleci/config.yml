@@ -9,6 +9,8 @@ jobs:
       - checkout
       - run: pwd
       - run: dotnet restore
+      - run: dotnet tool install -g BomSweeper.GlobalTool
+      - run: /root/.dotnet/tools/bomsweeper '**/*.cs' '**/*.csproj' '**/*.sln'
       - run: dotnet build
       - run: dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=opencover --no-build BomSweeper.Test
       - run: dotnet tool install -g dotnet-reportgenerator-globaltool
