@@ -13,7 +13,7 @@ namespace BomSweeper
     {
         private Action<Action> doIfVerbose = a => { };
         private Action chdirAction = () => { };
-        private Action<string> bomFileConsumer;
+        private Strategy strategy = FindStategy;
         private int maxDepth = PathFinder.DefaultMaxDepth;
 
         /// <summary>
@@ -27,8 +27,6 @@ namespace BomSweeper
             var maxDepthDescription
                 = "The maximum number of directory levels to search.\n"
                 + $"(Default: '{maxDepth}')";
-
-            bomFileConsumer = PrintBomFilename;
 
             static int ParseMaxDepth(ValueOption o)
             {
@@ -52,7 +50,7 @@ namespace BomSweeper
                 .Add(
                     "remove",
                     'R',
-                    o => bomFileConsumer = BomKit.RemoveBom,
+                    o => strategy = RemoveStategy,
                     "Remove a BOM")
                 .Add(
                     "directory",
@@ -85,6 +83,12 @@ namespace BomSweeper
                 throw new TerminateProgramException(1);
             }
         }
+
+        private static Strategy FindStategy { get; }
+            = new Strategy(PrintBomFilename, b => b ? 1 : 0);
+
+        private static Strategy RemoveStategy { get; }
+            = new Strategy(BomKit.RemoveBom, b => 0);
 
         /// <summary>
         /// Gets the setting of the command-line options.
@@ -174,7 +178,7 @@ namespace BomSweeper
             }
         }
 
-        private void PrintBomFilename(string file)
+        private static void PrintBomFilename(string file)
         {
             Console.WriteLine($"{file}: Starts with a BOM.");
         }
@@ -218,10 +222,47 @@ namespace BomSweeper
             var bomFiles = files.Where(BomKit.StartsWithBom);
             foreach (var f in bomFiles)
             {
-                bomFileConsumer(f);
+                strategy.ConsumeBomFile(f);
             }
 
-            throw new TerminateProgramException(bomFiles.Any() ? 1 : 0);
+            throw new TerminateProgramException(
+                strategy.SupplyStatusCode(bomFiles.Any()));
+        }
+
+        private sealed class Strategy
+        {
+            /// <summary>
+            /// Initializes a new instance of the <see cref="Strategy"/> class.
+            /// </summary>
+            /// <param name="consumeBomFile">
+            /// The action that consumes the file path, which matches the
+            /// specified pattern.
+            /// </param>
+            /// <param name="supplyStatusCode">
+            /// The function that consumes a boolean value and returns the
+            /// status code.
+            /// </param>
+            public Strategy(
+                Action<string> consumeBomFile,
+                Func<bool, int> supplyStatusCode)
+            {
+                ConsumeBomFile = consumeBomFile;
+                SupplyStatusCode = supplyStatusCode;
+            }
+
+            /// <summary>
+            /// Gets the action that consumes the file path, which matches the
+            /// specified pattern.
+            /// </summary>
+            public Action<string> ConsumeBomFile { get; }
+
+            /// <summary>
+            /// Gets the function that consumes a boolean value and returns the
+            /// status code. When the boolean value is <c>true</c>, it
+            /// represents that one or more files starting with a BOM are
+            /// found.
+            /// </summary>
+            public Func<bool, int> SupplyStatusCode { get; }
         }
     }
 }

@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>bomsweeper</ToolCommandName>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>BomSweeper.GlobalTool</PackageId>
+    <PackageVersion>$(Version)</PackageVersion>
+    <Authors>Tomohisa Tanaka</Authors>
+    <PackageProjectUrl>https://maroontress.github.io/BomSweeper-CSharp/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/maroontress/BomSweeper.CSharp</RepositoryUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description>BomSweeper is a command line tool that finds the files starting with a UTF-8 Byte Order Mark (BOM) in the directory tree and removes a BOM from those files.</Description>
+    <PackageReleaseNotes>See https://maroontress.github.io/BomSweeper-CSharp/releasenotes.html</PackageReleaseNotes>
+    <Copyright>Copyright (c) 2019 Maroontress Fast Software</Copyright>
+    <PackageTags>csharp, dotnet-core, global-tool, bomsweeper</PackageTags>
+    <NoPackageAnalysis>true</NoPackageAnalysis>
+    <Version>1.0.0.0</Version>
+    <RepositoryType />
+    <Company>Maroontress Fast Software</Company>
+    <PackageLicenseFile>COPYRIGHT.txt</PackageLicenseFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="nuget\readme.txt">
+      <Pack>true</Pack>
+      <PackagePath>\</PackagePath>
+    </Content>
+    <Content Include="nuget\COPYRIGHT.txt">
+      <Pack>true</Pack>
+      <PackagePath>\</PackagePath>
+    </Content>
+    <Content Include="nuget\LEGAL_NOTICES.txt">
+      <Pack>true</Pack>
+      <PackagePath>\</PackagePath>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BomSweeper\BomSweeper.csproj" />
+  </ItemGroup>
+
+</Project>
