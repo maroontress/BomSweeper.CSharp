@@ -59,6 +59,9 @@ Options are as follows:
 BomSweeper exits 0 if no files starting with a UTF-8 BOM are found,
 and &gt;0 if one or more files are found or if an error occurs.
 
+When `-R` or `--remove` option is specified,
+it exits 0 on success, and &gt;0 if an error occurs.
+
 ### Example
 
 ```bash
