@@ -23,6 +23,7 @@
     <RepositoryType />
     <Company>Maroontress Fast Software</Company>
     <PackageLicenseFile>COPYRIGHT.txt</PackageLicenseFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
