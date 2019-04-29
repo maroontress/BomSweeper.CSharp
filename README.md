@@ -65,7 +65,7 @@ and &gt;0 if one or more files are found or if an error occurs.
 dotnet BomSweeper.dll '**/*.cs'
 ```
 
-Find `.cs` files in the current directory and subdirectories.
+Find `.cs` files starting with a UTF-8 BOM in the current directory and subdirectories.
 
 ```bash
 dotnet BomSweeper.dll -R '**/*.cs'
