@@ -7,9 +7,18 @@ Byte Order Mark (BOM) in the directory tree and removing a BOM from those files.
 
 - [.NET Core 2.2 Runtime (Runtime 2.2.4)][dotnet-core-runtime]
 
+## Get started
+
+BomSweeper is available as [the NuGet Package][bomsweeper.globaltool],
+so it can be installed as follows:
+
+```bash
+dotnet tool install -g BomSweeper.GlobalTool
+```
+
 ## Synopsis
 
-> `dotnet BomSweeper.dll` [`-C` _DIR_] [`-D` _N_] [`-Rhv`] [`-`] _PATTERN_...
+> `bomsweeper` [`-C` _DIR_] [`-D` _N_] [`-Rhv`] [`-`] _PATTERN_...
 
 ## Description
 
@@ -65,13 +74,13 @@ it exits 0 on success, and &gt;0 if an error occurs.
 ### Example
 
 ```bash
-dotnet BomSweeper.dll '**/*.cs'
+bomsweeper '**/*.cs'
 ```
 
 Find `.cs` files starting with a UTF-8 BOM in the current directory and subdirectories.
 
 ```bash
-dotnet BomSweeper.dll -R '**/*.cs'
+bomsweeper -R '**/*.cs'
 ```
 
 Find `.cs` files in the current directory and subdirectories,
@@ -84,7 +93,7 @@ and remove a UTF-8 BOM from the files if any.
 - Visual Studio 2019 Version 16.0
   or [.NET Core 2.2 SDK (SDK 2.2.203)][dotnet-core-sdk]
 
-### Get started
+### Build with .NET Core SDK
 
 ```bash
 git clone URL
@@ -115,3 +124,5 @@ dotnet tool install --global --add-source bin/Debug BomSweeper.GlobalTool
   https://dotnet.microsoft.com/download/dotnet-core/2.2
 [dotnet-core-runtime]:
   https://dotnet.microsoft.com/download/dotnet-core/2.2
+[bomsweeper.globaltool]:
+  https://www.nuget.org/packages/BomSweeper.GlobalTool/
