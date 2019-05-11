@@ -12,7 +12,7 @@ Byte Order Mark (BOM) in the directory tree and removing a BOM from those files.
 BomSweeper is available as [the NuGet Package][bomsweeper.globaltool],
 so it can be installed as follows:
 
-```bash
+```plaintext
 dotnet tool install -g BomSweeper.GlobalTool
 ```
 
@@ -73,13 +73,13 @@ it exits 0 on success, and &gt;0 if an error occurs.
 
 ### Example
 
-```bash
+```plaintext
 bomsweeper '**/*.cs'
 ```
 
 Find `.cs` files starting with a UTF-8 BOM in the current directory and subdirectories.
 
-```bash
+```plaintext
 bomsweeper -R '**/*.cs'
 ```
 
@@ -95,7 +95,7 @@ and remove a UTF-8 BOM from the files if any.
 
 ### Build with .NET Core SDK
 
-```bash
+```plaintext
 git clone URL
 cd BomSweeper.CSharp
 dotnet restore
@@ -104,7 +104,7 @@ dotnet build
 
 ### Get test coverage report with Coverlet
 
-```bash
+```plaintext
 dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=opencover \
         --no-build BomSweeper.Test
 dotnet ANYWHERE/reportgenerator.dll \
@@ -114,7 +114,7 @@ dotnet ANYWHERE/reportgenerator.dll \
 
 ### Install BomSweeper as a Global Tool
 
-```bash
+```plaintext
 cd BomSweeper.GlobalTool
 dotnet pack
 dotnet tool install --global --add-source bin/Debug BomSweeper.GlobalTool

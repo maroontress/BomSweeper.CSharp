@@ -1,5 +1,3 @@
-#pragma warning disable SA1004
-
 namespace Maroontress.Cui.Impl
 {
     using System;
