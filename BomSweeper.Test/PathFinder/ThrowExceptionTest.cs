@@ -43,16 +43,10 @@ namespace BomSweeper.Test.PathFinder
                     ./baz/foo
                     ./baz/bar/ <-- Security
                 */
-                void ThrowSecurityException()
-                    => throw new SecurityException();
-
-                void ThrowDirectoryNotFoundException()
-                    => throw new DirectoryNotFoundException();
-
                 var bazBar = new ExceptionThrowingDirectoryAct(
-                    ThrowSecurityException, "bar");
+                    () => new SecurityException(), "bar");
                 var bar = new ExceptionThrowingDirectoryAct(
-                    ThrowDirectoryNotFoundException, "bar");
+                    () => new DirectoryNotFoundException(), "bar");
                 var baz = new TestDirectoryAct("baz")
                     .AddFile(new TestFileAct("foo"))
                     .AddDir(bazBar);
