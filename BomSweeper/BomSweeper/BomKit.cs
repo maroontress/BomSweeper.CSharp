@@ -46,6 +46,10 @@ namespace BomSweeper
             {
                 return false;
             }
+            catch (UnauthorizedAccessException)
+            {
+                return false;
+            }
         }
 
         /// <summary>
