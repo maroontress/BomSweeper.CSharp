@@ -1,6 +1,6 @@
 # BomSweeper
 
-BomSweeper is a command line tool that finds the files starting with a UTF-8
+BomSweeper is a command-line tool that finds the files starting with a UTF-8
 Byte Order Mark (BOM) in the directory tree and removing a BOM from those files.
 
 ## Requirements
@@ -47,11 +47,11 @@ contain a double asterisk ('`**`'), which represents as follows:
 
 - if the pattern starts with `**/` (a double asterisk followed by a slash),
   the subpattern `**/` matches the current directory and its subdirectories.
-  For example, `**/foo` matches `foo`, `bar/foo` and `bar/baz/foo`.
+  For example, `**/foo` matches `foo`, `bar/foo`, and `bar/baz/foo`.
 
 - if the pattern contains `/**/`, the subpattern `/**/` matches a slash,
-  the directories and subdirectories. For example, `foo/**/bar` matches
-  `foo/bar`, `foo/baz/bar` and `foo/baz/qux/bar`.
+  the directories, and subdirectories. For example, `foo/**/bar` matches
+  `foo/bar`, `foo/baz/bar`, and `foo/baz/qux/bar`.
 
 Options are as follows:
 
