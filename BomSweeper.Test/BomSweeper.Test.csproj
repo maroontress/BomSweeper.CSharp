@@ -33,7 +33,7 @@
     <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
     <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
     <PackageReference Include="ReportGenerator" Version="4.1.5" />
-    <PackageReference Include="StyleChecker" Version="1.0.23" PrivateAssets="all" />
+    <PackageReference Include="StyleChecker" Version="1.0.24" PrivateAssets="all" />
     <PackageReference Include="StyleChecker.Annotations" Version="1.0.1" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" PrivateAssets="all" />
   </ItemGroup>
