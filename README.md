@@ -18,7 +18,7 @@ dotnet tool install -g BomSweeper.GlobalTool
 
 ## Synopsis
 
-> `bomsweeper` [`-C` _DIR_] [`-D` _N_] [`-Rhv`] [`-`] _PATTERN_...
+> `bomsweeper` [`-C` _DIR_] [`-D` _N_] [`-Rhv`] [`--`] _PATTERN_...
 
 ## Description
 
@@ -55,23 +55,27 @@ contain a double asterisk ('`**`'), which represents as follows:
 
 Options are as follows:
 
-| Option | Description |
-|:---|:---|
-| `-C` _DIR_, `--directory=`_DIR_ | Change to directory. (Default: `.`) |
-| `-D` _N_, `--max-depth=`_N_ | The maximum number of directory levels to search. (Default: `16`) |
-| `-R`, `--remove` | Remove a BOM |
-| `-h`, `--help` | Show help message and exit |
-| `-v`, `--verbose` | Be verbose |
+| | Option | | Description |
+|---:|:---|:---|:---|
+| `-C`, | `--directory` | _`DIR`_ | Change to directory. (Default: `.`) |
+| `-D`, | `--max-depth` | _`N`_ | The maximum number of directory levels to search. (Default: `16`) |
+| `-R`, | `--remove` | | Remove a BOM |
+| `-h`, | `--help` | | Show help message and exit |
+| `-v`, | `--verbose` | | Be verbose |
 
 ### Exit status
 
 BomSweeper exits 0 if no files starting with a UTF-8 BOM are found,
 and &gt;0 if one or more files are found or if an error occurs.
 
-When `-R` or `--remove` option is specified,
+When the `-R` or `--remove` option is specified,
 it exits 0 on success, and &gt;0 if an error occurs.
 
 ### Example
+
+Note that, in the following examples,
+the glob pattern is enclosed in apostrophes (`'`...`'`)
+to prevent the shell from expanding the pattern.
 
 ```plaintext
 bomsweeper '**/*.cs'
@@ -90,8 +94,8 @@ and remove a UTF-8 BOM from the files if any.
 
 ### Requirements to build
 
-- Visual Studio 2019 Version 16.0
-  or [.NET Core 2.2 SDK (SDK 2.2.203)][dotnet-core-sdk]
+- Visual Studio 2019 Version 16.1
+  or [.NET Core 2.2 SDK (SDK 2.2.300)][dotnet-core-sdk]
 
 ### Build with .NET Core SDK
 

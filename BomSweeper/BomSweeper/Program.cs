@@ -28,9 +28,9 @@ namespace BomSweeper
                 = "The maximum number of directory levels to search.\n"
                 + $"(Default: '{maxDepth}')";
 
-            static int ParseMaxDepth(ValueOption o)
+            static int ParseMaxDepth(RequiredArgumentOption o)
             {
-                var s = o.Value;
+                var s = o.ArgumentValue;
                 if (!int.TryParse(s, out var value)
                     || value <= 0)
                 {
@@ -42,7 +42,7 @@ namespace BomSweeper
 
             void ShowUsageAndExit(Option o)
             {
-                Usage(o.Schema);
+                Usage(o.Schema, Console.Out);
                 throw new TerminateProgramException(1);
             }
 
@@ -50,36 +50,36 @@ namespace BomSweeper
                 .Add(
                     "remove",
                     'R',
-                    o => strategy = RemoveStategy,
-                    "Remove a BOM")
+                    "Remove a BOM",
+                    o => strategy = RemoveStategy)
                 .Add(
                     "directory",
                     'C',
-                    o => chdirAction = () => ChangeDirectory(o),
                     "DIR",
-                    "Change to directory. (Default: '.')")
+                    "Change to directory. (Default: '.')",
+                    o => chdirAction = () => ChangeDirectory(o))
                 .Add(
                     "max-depth",
                     'D',
-                    o => maxDepth = ParseMaxDepth(o),
                     "N",
-                    maxDepthDescription)
+                    maxDepthDescription,
+                    o => maxDepth = ParseMaxDepth(o))
                 .Add(
                     "verbose",
                     'v',
-                    o => doIfVerbose = a => a(),
-                    "Be verbose")
+                    "Be verbose",
+                    o => doIfVerbose = a => a())
                 .Add(
                     "help",
                     'h',
-                    ShowUsageAndExit,
-                    "Show this message and exit");
+                    "Show this message and exit",
+                    ShowUsageAndExit);
 
             Setting = schema.Parse(args);
 
             if (!Setting.Arguments.Any())
             {
-                Usage(schema);
+                Usage(schema, Console.Error);
                 throw new TerminateProgramException(1);
             }
         }
@@ -111,8 +111,9 @@ namespace BomSweeper
             }
             catch (OptionParsingException e)
             {
-                Console.WriteLine(e.Message);
-                Usage(e.Schema);
+                var stderr = Console.Error;
+                stderr.WriteLine(e.Message);
+                Usage(e.Schema, stderr);
                 Environment.Exit(1);
             }
             catch (TerminateProgramException e)
@@ -121,9 +122,9 @@ namespace BomSweeper
             }
         }
 
-        private static void ChangeDirectory(ValueOption o)
+        private static void ChangeDirectory(RequiredArgumentOption o)
         {
-            var dir = o.Value;
+            var dir = o.ArgumentValue;
             if (dir is null)
             {
                 return;
@@ -131,7 +132,7 @@ namespace BomSweeper
 
             static void Abort(string m)
             {
-                Console.WriteLine(m);
+                Console.Error.WriteLine(m);
                 throw new TerminateProgramException(1);
             }
 
@@ -161,20 +162,19 @@ namespace BomSweeper
             }
         }
 
-        private static void Usage(OptionSchema schema)
+        private static void Usage(OptionSchema schema, TextWriter @out)
         {
             var dllName = typeof(Program).Assembly.GetName().Name;
-            var all = $"usage: dotnet {dllName}.dll [Options]... PATTERN...\n"
-                + "\n"
-                + "Options are:";
-            foreach (var m in all.Split('\n'))
+            var all = new[]
             {
-                Console.WriteLine(m);
-            }
-            var lines = schema.GetHelpMessage();
-            foreach (var s in lines)
+                $"usage: dotnet {dllName}.dll [Options]... [--] PATTERN...",
+                "",
+                "Options are:",
+            };
+            var lines = all.Concat(schema.GetHelpMessage());
+            foreach (var m in lines)
             {
-                Console.WriteLine(s);
+                @out.WriteLine(m);
             }
         }
 
