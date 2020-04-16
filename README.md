@@ -57,10 +57,10 @@ Options are as follows:
 
 | | Option | | Description |
 |---:|:---|:---|:---|
-| `-C`, | `--directory` | _`DIR`_ | Change to directory. (Default: `.`) |
-| `-D`, | `--max-depth` | _`N`_ | The maximum number of directory levels to search. (Default: `16`) |
-| `-R`, | `--remove` | | Remove a BOM |
+| `-C`, | `--directory` | _DIR_ | Change to directory. (Default: `.`) |
 | `-h`, | `--help` | | Show help message and exit |
+| `-D`, | `--max-depth` | _N_ | The maximum number of directory levels to search. (Default: `16`) |
+| `-R`, | `--remove` | | Remove a BOM |
 | `-v`, | `--verbose` | | Be verbose |
 
 ### Exit status
