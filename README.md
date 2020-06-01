@@ -5,7 +5,7 @@ Byte Order Mark (BOM) in the directory tree and removing a BOM from those files.
 
 ## Requirements
 
-- [.NET Core 2.2 Runtime (Runtime 2.2.4)][dotnet-core-runtime]
+- [.NET Core 3.1 Runtime (Runtime 3.1.4)][dotnet-core-runtime]
 
 ## Get started
 
@@ -18,7 +18,7 @@ dotnet tool install -g BomSweeper.GlobalTool
 
 ## Synopsis
 
-> `bomsweeper` [`-C` _DIR_] [`-D` _N_] [`-Rhv`] [`--`] _PATTERN_...
+> `bomsweeper` [`-C` _DIR_] [`-D` _N_] [`-RVhv`] [`--`] _PATTERN_...
 
 ## Description
 
@@ -62,6 +62,7 @@ Options are as follows:
 | `-D`, | `--max-depth` | _N_ | The maximum number of directory levels to search. (Default: `16`) |
 | `-R`, | `--remove` | | Remove a BOM |
 | `-v`, | `--verbose` | | Be verbose |
+| `-V`, | `--version` | | Show version and exit |
 
 ### Exit status
 
@@ -94,8 +95,8 @@ and remove a UTF-8 BOM from the files if any.
 
 ### Requirements to build
 
-- Visual Studio 2019 Version 16.1
-  or [.NET Core 2.2 SDK (SDK 2.2.300)][dotnet-core-sdk]
+- Visual Studio 2019 Version 16.5
+  or [.NET Core 3.1 SDK (SDK 3.1.300)][dotnet-core-sdk]
 
 ### Build with .NET Core SDK
 
@@ -125,8 +126,8 @@ dotnet tool install --global --add-source bin/Debug BomSweeper.GlobalTool
 ```
 
 [dotnet-core-sdk]:
-  https://dotnet.microsoft.com/download/dotnet-core/2.2
+  https://dotnet.microsoft.com/download/dotnet-core/3.1
 [dotnet-core-runtime]:
-  https://dotnet.microsoft.com/download/dotnet-core/2.2
+  https://dotnet.microsoft.com/download/dotnet-core/3.1
 [bomsweeper.globaltool]:
   https://www.nuget.org/packages/BomSweeper.GlobalTool/
