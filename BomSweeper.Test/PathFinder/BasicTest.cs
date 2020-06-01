@@ -55,7 +55,7 @@ namespace BomSweeper.Test.PathFinder
         {
             Toolkit.TheInstance = new TestToolkit();
 
-            void Perform(int depth)
+            static void Perform(int depth)
             {
                 var actual = PathFinder.GetFiles(".", depth);
                 var array = actual.ToArray();

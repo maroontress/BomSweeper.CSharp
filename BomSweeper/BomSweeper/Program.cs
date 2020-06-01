@@ -3,6 +3,7 @@ namespace BomSweeper
     using System;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
     using System.Text.RegularExpressions;
     using Maroontress.Cui;
 
@@ -40,9 +41,15 @@ namespace BomSweeper
                 return value;
             }
 
-            void ShowUsageAndExit(Option o)
+            static void ShowUsageAndExit(Option o)
             {
                 Usage(o.Schema, Console.Out);
+                throw new TerminateProgramException(1);
+            }
+
+            static void ShowVersionAndExit()
+            {
+                Version(Console.Out);
                 throw new TerminateProgramException(1);
             }
 
@@ -69,6 +76,11 @@ namespace BomSweeper
                     'v',
                     "Be verbose",
                     o => doIfVerbose = a => a())
+                .Add(
+                    "version",
+                    'V',
+                    "Show version and exit",
+                    o => ShowVersionAndExit())
                 .Add(
                     "help",
                     'h',
@@ -162,9 +174,21 @@ namespace BomSweeper
             }
         }
 
+        private static string GetDllName()
+            => typeof(Program).Assembly.GetName().Name;
+
+        private static void Version(TextWriter @out)
+        {
+            var dllName = GetDllName();
+            var version = Assembly.GetEntryAssembly()
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                .InformationalVersion;
+            @out.WriteLine($"{dllName} version {version}");
+        }
+
         private static void Usage(OptionSchema schema, TextWriter @out)
         {
-            var dllName = typeof(Program).Assembly.GetName().Name;
+            var dllName = GetDllName();
             var all = new[]
             {
                 $"usage: dotnet {dllName}.dll [Options]... [--] PATTERN...",
