@@ -19,7 +19,7 @@
     <Copyright>Copyright (c) 2019 Maroontress Fast Software</Copyright>
     <PackageTags>csharp, dotnet-core, global-tool, bomsweeper</PackageTags>
     <NoPackageAnalysis>true</NoPackageAnalysis>
-    <Version>1.0.0.0</Version>
+    <Version>1.0.1.0</Version>
     <RepositoryType />
     <Company>Maroontress Fast Software</Company>
     <PackageLicenseFile>COPYRIGHT.txt</PackageLicenseFile>
