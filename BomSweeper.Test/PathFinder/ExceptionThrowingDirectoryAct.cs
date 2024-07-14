@@ -1,58 +1,38 @@
-namespace BomSweeper.Test.PathFinder
+namespace BomSweeper.Test.PathFinder;
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using BomSweeper;
+
+/// <summary>
+/// A <see cref="DirectoryAct"/> implementation. All the methods throw an
+/// exception.
+/// </summary>
+/// <param name="NewException">
+/// The function that returns a new exception. Calling any method of this class
+/// throws the exception this function supplies.
+/// </param>
+/// <param name="Name">
+/// The directory's name.
+/// </param>
+/// <param name="Attributes">
+/// The directory's attribute.
+/// </param>
+public record class ExceptionThrowingDirectoryAct(
+    Func<Exception> NewException,
+    string Name,
+    FileAttributes Attributes = FileAttributes.Directory) : DirectoryAct
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using BomSweeper;
-
-    /// <summary>
-    /// A <see cref="DirectoryAct"/> implementation. All the methods throw
-    /// an exception.
-    /// </summary>
-    public sealed class ExceptionThrowingDirectoryAct : DirectoryAct
+    /// <inheritdoc/>
+    public IEnumerable<DirectoryAct> GetDirectories()
     {
-        private readonly Func<Exception> newException;
+        throw NewException();
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see
-        /// cref="ExceptionThrowingDirectoryAct"/> class.
-        /// </summary>
-        /// <param name="newException">
-        /// The function that returns a new exception. Calling any method of
-        /// this class throws the exception this function supplies.
-        /// </param>
-        /// <param name="name">
-        /// The directory's name.
-        /// </param>
-        /// <param name="attributes">
-        /// The directory's attribute.
-        /// </param>
-        public ExceptionThrowingDirectoryAct(
-            Func<Exception> newException,
-            string name,
-            FileAttributes attributes = FileAttributes.Directory)
-        {
-            this.newException = newException;
-            Name = name;
-            Attributes = attributes;
-        }
-
-        /// <inheritdoc/>
-        public string Name { get; }
-
-        /// <inheritdoc/>
-        public FileAttributes Attributes { get; }
-
-        /// <inheritdoc/>
-        public IEnumerable<DirectoryAct> GetDirectories()
-        {
-            throw newException();
-        }
-
-        /// <inheritdoc/>
-        public IEnumerable<FileAct> GetFiles()
-        {
-            throw newException();
-        }
+    /// <inheritdoc/>
+    public IEnumerable<FileAct> GetFiles()
+    {
+        throw NewException();
     }
 }
