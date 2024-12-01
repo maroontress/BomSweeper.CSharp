@@ -5,11 +5,11 @@ Byte Order Mark (BOM) in the directory tree and removing a BOM from those files.
 
 ## Requirements
 
-- [.NET Core 3.1 Runtime (Runtime 3.1.4)][dotnet-core-runtime]
+- [.NET 9.0 Runtime][dotnet-core-runtime]
 
 ## Get started
 
-BomSweeper is available as [the NuGet Package][bomsweeper.globaltool],
+BomSweeper is available as the [NuGet Package][bomsweeper.globaltool],
 so it can be installed as follows:
 
 ```plaintext
@@ -66,37 +66,36 @@ Options are as follows:
 
 ### Exit status
 
-BomSweeper exits 0 if no files starting with a UTF-8 BOM are found,
-and &gt;0 if one or more files are found or if an error occurs.
+BomSweeper exits 0 if no files starting with a UTF-8 BOM are found, and &gt;0 if
+one or more files are found or if an error occurs.
 
-When the `-R` or `--remove` option is specified,
-it exits 0 on success, and &gt;0 if an error occurs.
+When the `-R` or `--remove` option is specified, it exits 0 on success, and
+&gt;0 if an error occurs.
 
 ### Example
 
-Note that, in the following examples,
-the glob pattern is enclosed in apostrophes (`'`...`'`)
-to prevent the shell from expanding the pattern.
+Note that, in the following examples, the glob pattern is enclosed in
+apostrophes (`'`...`'`) to prevent the shell from expanding the pattern.
 
 ```plaintext
 bomsweeper '**/*.cs'
 ```
 
-Find `.cs` files starting with a UTF-8 BOM in the current directory and subdirectories.
+Find `.cs` files starting with a UTF-8 BOM in the current directory and
+subdirectories.
 
 ```plaintext
 bomsweeper -R '**/*.cs'
 ```
 
-Find `.cs` files in the current directory and subdirectories,
-and remove a UTF-8 BOM from the files if any.
+Find `.cs` files in the current directory and subdirectories, and remove a UTF-8
+BOM from the files if any.
 
 ## How to build
 
 ### Requirements to build
 
-- Visual Studio 2019 Version 16.5
-  or [.NET Core 3.1 SDK (SDK 3.1.300)][dotnet-core-sdk]
+- Visual Studio 2022 Version 17.12 or [.NET 9.0 SDK (SDK 9.0.100)][dotnet-core-sdk]
 
 ### Build with .NET Core SDK
 
@@ -125,9 +124,6 @@ dotnet pack
 dotnet tool install --global --add-source bin/Debug BomSweeper.GlobalTool
 ```
 
-[dotnet-core-sdk]:
-  https://dotnet.microsoft.com/download/dotnet-core/3.1
-[dotnet-core-runtime]:
-  https://dotnet.microsoft.com/download/dotnet-core/3.1
-[bomsweeper.globaltool]:
-  https://www.nuget.org/packages/BomSweeper.GlobalTool/
+[dotnet-core-sdk]: https://dotnet.microsoft.com/en-us/download/dotnet/9.0
+[dotnet-core-runtime]: https://dotnet.microsoft.com/en-us/download/dotnet/9.0
+[bomsweeper.globaltool]: https://www.nuget.org/packages/BomSweeper.GlobalTool/

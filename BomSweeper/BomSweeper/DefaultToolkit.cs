@@ -1,14 +1,13 @@
-namespace BomSweeper
+namespace BomSweeper;
+
+/// <summary>
+/// The default implementation of <see cref="Toolkit"/> class.
+/// </summary>
+public sealed class DefaultToolkit : Toolkit
 {
-    /// <summary>
-    /// The default implementation of <see cref="Toolkit"/> class.
-    /// </summary>
-    public sealed class DefaultToolkit : Toolkit
+    /// <inheritdoc/>
+    public override DirectoryAct GetDirectoryAct(string path)
     {
-        /// <inheritdoc/>
-        public override DirectoryAct GetDirectoryAct(string path)
-        {
-            return new DefaultDirectoryAct(path);
-        }
+        return new DefaultDirectoryAct(path);
     }
 }
